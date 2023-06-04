@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="fontawesome.css">
+<style media="screen">
+    *{
+        margin:0; padding:0;
+        box-sizing: border-box;
+        letter-spacing:1px;
+        font-family: verdana;
+        text-transform: capitalize;
+        list-style: none;
+
+    }
+    span{
+            width: 30px;
+            height: 30px;
+            background: url("star3.png") no-repeat;
+            position: fixed;
+            background-size:100% 100%;
+            animation: flash 1s alternate infinite;
+        }
+        
+        @keyframes flash {
+            0%{opacity: 0;}
+            100%{opacity: 1;}
+        }
+
+        span:hover{
+            transform: scale(3, 3) rotate(180deg) !important;
+            transition: all 1s;
+        }
+    body{
+        min-height: 100vh;
+        display:flex;
+        align-items:center;
+        justify-content: center;
+        background-color: rgb(0, 14, 18) ;
+        background:linear-gradient(45deg,rgb(245, 209, 162) );
+
+    }
+.container{
+    max-width: 450px;
+    width: 100%;
+    background:#f4c9c9d3;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgb(242, 178, 163);
+    padding:10px;
+    overflow-y:auto;
+    margin: 0 auto;
+
+}
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+    }
+}
+h1{
+    text-align: center;
+    color:#f3e8a7d3;
+}
+#input{
+    height: 50px;
+    width: 100%;
+    outline:none;
+    border:none;
+    border-radius: 20px;
+    background: #fcfbe9dc;
+    color:#33405b;
+    padding:0 10px;
+    margin:15px 0;
+}
+#input::placeholder{
+    color:#3a4162;
+}
+
+ul li{
+    background: #fcfbe9dc;
+    color:#3a4162;
+    height: 40px;
+    border-radius:50px;
+    margin:10px 0;
+    padding:10px;
+    position: relative;
+    
+
+}
+ul .fa-check, .fa-trash{
+    position:absolute;
+    cursor:pointer;
+}
+
+ul .fa-check{
+    right:40px;
+    color:rgb(132, 193, 132);
+}
+ul .fa-trash{
+    right:15px;
+    color:#f0a8b6;
+}
+
+ul .checked{
+    background: rgb(198, 231, 241);
+    text-decoration: line-through;
+    transition:.2s;
+}
+</style>
+<script src="jquery.js" charset="utf-8"></script>
+</head>
+<body>
+    <i class="fa fa-check"></i>
+    <div class="container">
+        <span></span>
+        <h1>To Do List</h1>
+        
+        <input type="text" id="input" placeholder="Press Enter to Seize Each Moment :)">
+        <ul>
+           
+        </ul>
+        
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#input').change(function(){
+                var input = $(this).val();
+                $('ul').append('<li>'+ input +'<i class="fa fa-check"></i> <i class="fa fa-trash"></i> </li>');
+                $(this).val('');
+            })
+            $('ul').on('click','.fa-trash',function(){
+                $(this).parent('li').fadeOut(200);
+            })
+            $('ul').on('click','.fa-check',function(){
+                $(this).parent('li').toggleClass('checked');
+            })
+        })
+
+        window.onload = function () {
+        var screenW = document.documentElement.clientWidth;
+        var screenH = document.documentElement.clientHeight;
+
+        for(var i=0; i<150; i++){
+            var span = document.createElement('span');
+            document.body.appendChild(span);
+
+            var x = parseInt(Math.random() * screenW);
+            var y = parseInt(Math.random() * screenH);
+            span.style.left = x + 'px';
+            span.style.top = y + 'px';
+
+            var scale = Math.random() * 1;
+            span.style.transform = 'scale('+ scale + ', ' + scale + ')';
+
+            var rate = Math.random() * 0.5;
+            span.style.animationDelay = rate + 's';
+        }
+    }
+    </script>
+</body>
+</html>
